@@ -20,7 +20,7 @@ stages:
     jobs:
       - job: Build
         displayName: Build
-        pool: local-agent
+        pool: local-agent 
 
         steps:
           - script: |
