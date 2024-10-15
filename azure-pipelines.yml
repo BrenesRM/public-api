@@ -17,8 +17,8 @@ stages: # JOBs QA
   jobs:
   - job: Build
     displayName: Build
-    pool:
-      vmImage: $(vmImageName)
+    #pool:
+      #vmImage: $(vmImageName)
 
     steps:
     - task: Docker@2
