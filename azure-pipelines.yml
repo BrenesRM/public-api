@@ -1,31 +1,36 @@
 trigger:
-- main
-
-pool: local-agent
+  - main
 
 resources:
-- repo: self
+  - repo: self
 
 variables:
-  tag: '$(Build.BuildId)'
-  imageName: 'public-api'
-  vmImageNmae: ubuntu-latest
+  - group: "CICD"
+  - name: app_var
+    value: $[variables.appVariable]
+parameters:
+  - name: tag
+    default: "$(Build.BuildId)"
+  - name: imageName
+    default: "public-api"
 
-stages: # JOBs QA
-- stage: Build
-  displayName: Build image
-  jobs:
-  - job: Build
-    displayName: Build
-    #pool:
-      #vmImage: $(vmImageName)
+stages:
+  - stage: Build
+    displayName: Build image
+    jobs:
+      - job: Build
+        displayName: Build
+        pool: test
 
-    steps:
-    - task: Docker@2
-      displayName: Build an image
-      inputs:
-        repository: $(imageName)
-        command: build
-        dockerfile: '**/qa.dockerfile'
-        tags: |
-          $(tag)
+        steps:
+          - script: |
+              echo "var=$(app_var)"
+
+          - task: Docker@2
+            displayName: Build an image
+            inputs:
+              repository: ${{ parameters.imageName }}
+              command: build
+              dockerfile: "**/qa.dockerfile"
+              tags: ${{ parameters.tag }}
+              arguments: '--build-arg APP_ENV=$(app_var)'
