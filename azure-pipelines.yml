@@ -20,7 +20,7 @@ stages:
     jobs:
       - job: Build
         displayName: Build
-        pool: test
+        pool: public-api
 
         steps:
           - script: |
