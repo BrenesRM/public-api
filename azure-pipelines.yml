@@ -1,6 +1,8 @@
 trigger:
   - main
 
+pool: local-agent
+
 resources:
   - repo: self
 
@@ -8,6 +10,7 @@ variables:
   - group: "CICD"
   - name: app_var
     value: $[variables.appVariable]
+    
 parameters:
   - name: tag
     default: "$(Build.BuildId)"
