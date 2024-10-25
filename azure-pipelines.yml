@@ -13,7 +13,7 @@ variables:
 
 parameters:
   - name: tag
-    default: "$(Build.BuildId)"
+    default: "$(Build.BuildId)" 
   - name: imageName
     default: "public-api"
 
@@ -48,3 +48,5 @@ stages:
               repository: ${{ parameters.imageName }}
               tags: |
                 ${{ parameters.tag }}
+
+
