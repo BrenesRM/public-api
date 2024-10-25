@@ -47,4 +47,4 @@ stages:
               containerRegistry: 'registryConnection'
               repository: ${{ parameters.imageName }}
               tags: |
-                ${{ parameters.tag }} #d
+                ${{ parameters.tag }}
